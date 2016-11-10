@@ -55,13 +55,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.i("A*","OnClick to Node");
                         if(isMakeObstack()){
                             node.setWalkable(!node.isWalkable());
+                            node.setBackgroundColor(getResources().getColor(node.isWalkable() ? R.color.colorPrimary : R.color.colorBlack));
                         }
-                        node.setBackgroundColor(getResources().getColor(node.isWalkable() ? R.color.colorPrimary : R.color.colorBlack));
                     }
                 });
                 map[i][j] = node;
             }
             mapLinear.addView(rowIndexLL);
+        }
+    }
+
+    private void setupNextNode(){
+        for (int i = 1; i < maxRow - 1; i++) {
+            for (int j = 1; j < maxColumn - 1; j++) {
+
+                if (map [i - 1][j].isWalkable()){
+                    map[i][j].getNext().add(map[i-1][j]);
+                }
+
+                if (map [i + 1][j].isWalkable()){
+                    map[i][j].getNext().add(map[i+1][j]);
+                }
+
+                if (map [i][j-1].isWalkable()){
+                    map[i][j].getNext().add(map[i][j-1]);
+                }
+
+                if (map [i][j+1].isWalkable()){
+                    map[i][j].getNext().add(map[i][j+1]);
+                }
+
+            }
         }
     }
 
@@ -82,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.execute:
+                setupNextNode();
                 AStarpathfinding();
                 break;
             case R.id.obstacle:

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by FRAMGIA\nguyen.van.tung on 10/11/2016.
  */
-public class Node extends ImageView implements View.OnClickListener {
+public class Node extends ImageView{
 
     private String nodeID = "";
     private int position;
@@ -100,9 +100,5 @@ public class Node extends ImageView implements View.OnClickListener {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 }
