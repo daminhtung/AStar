@@ -2,6 +2,7 @@ package Ultis;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
 
 /**
@@ -27,5 +28,9 @@ public class Libs {
         DisplayMetrics metrics = resources.getDisplayMetrics();
         float dp = px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
         return dp;
+    }
+
+    public double distanceTwoPoint(Point pointA, Point pointB){
+        return Math.sqrt( (pointB.x -= pointA.x)*pointB.x + (pointB.y -= pointA.y)*pointB.y );
     }
 }

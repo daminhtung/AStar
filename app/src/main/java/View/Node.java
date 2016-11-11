@@ -1,9 +1,7 @@
 package View;
 
 import android.content.Context;
-import android.os.Debug;
-import android.util.Log;
-import android.view.View;
+import android.graphics.Point;
 import android.widget.ImageView;
 
 import com.example.framgianguyenvantung.astar.MainActivity;
@@ -18,13 +16,13 @@ import java.util.List;
 public class Node extends ImageView{
 
     private String nodeID = "";
-    private int position;
+    private Point position;
     private List<Node> next = new ArrayList<>();
     private  Node caneFrom;
     private  boolean isWalkable = true;
-    private int G;
-    private int H;
-    private int F;
+    private double G;
+    private double H;
+    private double F;
     private MainActivity parentClass;
 
     public Node(Context context) {
@@ -54,27 +52,27 @@ public class Node extends ImageView{
         this.caneFrom = caneFrom;
     }
 
-    public int getF() {
+    public double getF() {
         return F;
     }
 
-    public void setF(int f) {
+    public void setF(double f) {
         F = f;
     }
 
-    public int getG() {
+    public double getG() {
         return G;
     }
 
-    public void setG(int g) {
+    public void setG(double g) {
         G = g;
     }
 
-    public int getH() {
+    public double getH() {
         return H;
     }
 
-    public void setH(int h) {
+    public void setH(double h) {
         H = h;
     }
 
@@ -83,6 +81,7 @@ public class Node extends ImageView{
     }
 
     public void setWalkable(boolean walkable) {
+        setBackgroundColor(getResources().getColor(walkable ? R.color.colorPrimary : R.color.colorBlack));
         isWalkable = walkable;
     }
 
@@ -94,11 +93,11 @@ public class Node extends ImageView{
         this.next = next;
     }
 
-    public int getPosition() {
+    public Point getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Point position) {
         this.position = position;
     }
 }
