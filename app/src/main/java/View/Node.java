@@ -10,13 +10,15 @@ import com.example.framgianguyenvantung.astar.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Position;
+
 /**
  * Created by FRAMGIA\nguyen.van.tung on 10/11/2016.
  */
 public class Node extends ImageView{
 
     private String nodeID = "";
-    private Point position;
+    private Position position;
     private List<Node> next = new ArrayList<>();
     private  Node caneFrom;
     private  boolean isWalkable = true;
@@ -29,6 +31,7 @@ public class Node extends ImageView{
         super(context);
         setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         parentClass = (MainActivity)context;
+        position = new Position (this.getX(), this.getY());
     }
 
     @Override
@@ -93,11 +96,11 @@ public class Node extends ImageView{
         this.next = next;
     }
 
-    public Point getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Point position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 }

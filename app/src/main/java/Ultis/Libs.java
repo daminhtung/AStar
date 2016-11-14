@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 
+import models.Position;
+
 /**
  * Created by FRAMGIA\nguyen.van.tung on 10/11/2016.
  */
@@ -32,5 +34,9 @@ public class Libs {
 
     public double distanceTwoPoint(Point pointA, Point pointB){
         return Math.sqrt( (pointB.x -= pointA.x)*pointB.x + (pointB.y -= pointA.y)*pointB.y );
+    }
+
+    public double distanceTwoPoint1(Position pointA, Position pointB){
+        return Math.sqrt( Math.pow ((pointB.getX() - pointA.getX()),2 ) + Math.pow ((pointB.getY() - pointA.getY()),2 ) );
     }
 }
