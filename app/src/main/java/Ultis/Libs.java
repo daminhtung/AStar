@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 /**
  * Created by FRAMGIA\nguyen.van.tung on 10/11/2016.
@@ -30,7 +31,8 @@ public class Libs {
         return dp;
     }
 
-    public double distanceTwoPoint(Point pointA, Point pointB){
-        return Math.sqrt( (pointB.x -= pointA.x)*pointB.x + (pointB.y -= pointA.y)*pointB.y );
+    public double distanceTwoPoint(Point pointA, Point pointB) {
+        double result = Math.sqrt( Math.pow( pointB.x -= pointA.x, 2)  +  Math.pow(pointB.y -= pointA.y, 2));
+        return result;
     }
 }
