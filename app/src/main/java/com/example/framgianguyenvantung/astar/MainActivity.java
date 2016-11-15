@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Node endPoint;
     private STATE state = STATE.NONE;
 
-    private TextView distanceTv;
     public enum STATE {
         SETUP_MAP, NONE
     }
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void findView() {
         findViewById(R.id.execute).setOnClickListener(this);
         findViewById(R.id.obstacle).setOnClickListener(this);
-        distanceTv = (TextView)findViewById(R.id.distance);
     }
 
     private void initialMap() {
@@ -93,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startPoint.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
                 startPoint = node;
-                startPoint.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+//                startPoint.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                startPoint.setBackground(getDrawable(R.drawable.r));
                 break;
             case END_POINT:
                 if (startPoint != null && node.getNodeID().equals(startPoint.getNodeID())) return;
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     endPoint.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
                 endPoint = node;
-                endPoint.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                endPoint.setBackground(getDrawable(R.drawable.tao));
                 break;
             case OBSTACLE_POINT:
                 node.setWalkable(false);
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupNodeType(final Node node) {
-        final CharSequence types[] = new CharSequence[]{OBSTACLE_POINT, START_POINT, END_POINT};
+        final CharSequence types[] = new CharSequence[]{OPEN_POINT,OBSTACLE_POINT, START_POINT, END_POINT};
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setItems(types, new DialogInterface.OnClickListener() {
             @Override
@@ -225,8 +224,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (state == STATE.SETUP_MAP || startPoint == null || endPoint == null) return;
                 clearAdjacent();
                 setupNextNode();
-                startPoint = map[1][1];
-                endPoint = map[5][8];
                 AStarpathfinding(startPoint, endPoint);
                 break;
             case R.id.obstacle:
@@ -242,26 +239,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Node tmp = t;
         while (tmp != null) {
             if (tmp.getCaneFrom() == null){
-                computeCostPath(path);
                 return path;
             }
             path.add(tmp);
             tmp = tmp.getCaneFrom();
-            if (!tmp.getNodeID().equals(startPoint.getNodeID()) && !tmp.getNodeID().equals(t.getNodeID()))
+            if (!tmp.getNodeID().equals(startPoint.getNodeID()) && !tmp.getNodeID().equals(t.getNodeID()) && tmp.isWalkable())
                 tmp.setBackgroundColor(getResources().getColor(R.color.colorPathResult));
         }
-        computeCostPath(path);
         return path;
-    }
-
-    private void computeCostPath(List<Node> nodes){
-        double distance = 0;
-        Log.i("TungDominico", "Before: "+distance);
-        for (int i = 0; i < nodes.size() - 1; i++){
-//            distance +=  Libs.getInstance().distanceTwoPoint(nodes.get(i).getPosition(), nodes.get(i+1).getCaneFrom().getPosition());
-            Log.i("TungDominico",nodes.get(i).getNodeID());
-        }
-        Log.i("TungDominico", "After: "+distance+"");
-        distanceTv.setText("Distance: " + distance);
     }
 }

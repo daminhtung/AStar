@@ -35,11 +35,4 @@
             android:text="Setup Map" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
 </LinearLayout>
